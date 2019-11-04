@@ -101,12 +101,13 @@
         width: "320",
         videoId: "0ywdqfpQB-w",
         events: {
+          // 初期読み込み完了時に動く関数の指定
           onReady: onPlayerReady
         }
       });
     };
 
-    // iframe準備完了時
+    // 初期読み込み完了時に動く関数
     const onPlayerReady = () => {
       // loadingアイコンをフェードアウト
       $(".loading").fadeOut();
