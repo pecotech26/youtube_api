@@ -132,42 +132,54 @@
         width: "320",
         videoId: "0ywdqfpQB-w",
         events: {
-          // 初期読み込み
+          // 初期読み込み時に動く関数の指定
           onReady: onPlayerReady,
-          // 初期読み込み以降
+          // 初期読み込み以降iframeの状態の変化に応じて動く関数の指定
           onStateChange: onPlayerStateChange
         }
       });
     };
 
-    // iframe初期読み込み完了時
+    // 初期読み込み時に動く関数
     const onPlayerReady = () => {
+      // loadingアイコンをフェードアウト
       $(".loading").fadeOut();
+      // 再生アイコンをフェードイン
       $("#play").fadeIn();
     };
 
-    // iframe内の動画入れ替え時
+    // iframeの状態の変化に応じて動く関数
     const onPlayerStateChange = e => {
-      // 頭出し完了時
+      // 動画の頭出し完了時
       if (e.data == 5) {
+        // loadingアイコンをフェードアウト
         $(".loading").fadeOut();
+        // 再生アイコンをフェードイン
         $("#play").fadeIn();
       }
     };
 
     // サムネイルクリック時
     $("#play").on("click", () => {
+      // thumbnailエリアごとフェードアウト
       $(".thumbnail").fadeOut();
+      // YouTubePlayerの再生
       player.playVideo();
     });
 
     // buttonクリック時
     $(".youtube_button").on("click", e => {
+      // 再生ボタンを非表示
       $("#play").hide();
+      // サムネイルを表示
       $(".thumbnail").show();
+      // loadingアイコンを表示
       $(".loading").show();
+      // ボタンのactiveクラスを全て外す
       $(".youtube_button").removeClass("active");
+      // クリックしたボタンにactiveクラスをつける
       e.target.classList.add("active");
+      // iframeの動画を差し替える
       player.cueVideoById({
         videoId: `${e.target.id}`,
         startSeconds: 0

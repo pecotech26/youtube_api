@@ -77,6 +77,8 @@
       }
     </style>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!-- APIの読み込み -->
     <script src="https://www.youtube.com/iframe_api"></script>
   </head>
 
@@ -91,7 +93,7 @@
   </body>
 
   <script>
-    // iframeの初期読み込み
+    // YouTubeのiframe初期読み込み
     let player;
     window.onYouTubeIframeAPIReady = () => {
       player = new YT.Player("youtube", {
@@ -106,13 +108,17 @@
 
     // iframe準備完了時
     const onPlayerReady = () => {
+      // loadingアイコンをフェードアウト
       $(".loading").fadeOut();
+      // 再生アイコンをフェードイン
       $("#play").fadeIn();
     };
 
     // サムネイルクリック時
     $("#play").on("click", () => {
+      // thumbnailエリアごとフェードアウト
       $(".thumbnail").fadeOut();
+      // YouTubePlayerの再生
       player.playVideo();
     });
   </script>
